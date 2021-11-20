@@ -108,6 +108,42 @@
             app:layout_constraintStart_toStartOf="@+id/humidity"
             app:layout_constraintTop_toTopOf="@+id/cloudText" />
 
+        <TextView
+            android:id="@+id/pressureText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:textSize="@dimen/city_text_size"
+            android:text="@string/pressure"
+            app:layout_constraintEnd_toEndOf="@+id/cloudText"
+            app:layout_constraintTop_toBottomOf="@+id/cloudText" />
+
+        <TextView
+            android:id="@+id/pressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/city_text_size"
+            app:layout_constraintStart_toStartOf="@+id/currentWeather"
+            app:layout_constraintTop_toTopOf="@+id/pressureText" />
+
+        <TextView
+            android:id="@+id/countryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:textSize="@dimen/city_text_size"
+            android:text="@string/country"
+            app:layout_constraintEnd_toEndOf="@+id/pressureText"
+            app:layout_constraintTop_toBottomOf="@+id/pressureText" />
+
+        <TextView
+            android:id="@+id/country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/city_text_size"
+            app:layout_constraintStart_toStartOf="@+id/pressure"
+            app:layout_constraintTop_toTopOf="@+id/countryText" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>

@@ -7,4 +7,6 @@
     <string name="temperature">Temperature(°C):</string>
     <string name="humidity">Humidity:</string>
     <string name="weather">Weather:</string>
+    <string name="pressure">Pressure:</string>
+    <string name="country">Country:</string>
 </resources>

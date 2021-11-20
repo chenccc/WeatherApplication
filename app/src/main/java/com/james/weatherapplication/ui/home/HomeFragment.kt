@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.james.weatherapplication.R
 import com.james.weatherapplication.base.BaseFragment
+import com.james.weatherapplication.data.model.CityWeather
 import com.james.weatherapplication.databinding.FragmentHomeBinding
 import com.james.weatherapplication.ext.observe
 import com.james.weatherapplication.ui.manager.toBlockActionClickListener
@@ -24,17 +25,23 @@ class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         binding.viewModel = viewModel
 
         with(viewModel) {
-            observe(weatherEvent) { cityWeather ->
-                cityWeather.apply {
-                    cityName.text = name
-                    humidity.text = main.humidity.toString()
-                    temp.text = main.temp.toString()
-                    currentWeather.text = if (weather.isNotEmpty()) {
-                        weather[0].main
-                    } else {
-                        ""
-                    }
-                }
+            observe(weatherEvent) {
+                fillHomePage(it)
+            }
+        }
+    }
+
+    private fun fillHomePage(cityWeather: CityWeather) {
+        cityWeather.apply {
+            cityName.text = name
+            humidity.text = main.humidity.toString()
+            country.text = sys.country
+            temp.text = main.temp.toString()
+            pressure.text = main.pressure.toString()
+            currentWeather.text = if (weather.isNotEmpty()) {
+                weather[0].main
+            } else {
+                ""
             }
         }
     }
