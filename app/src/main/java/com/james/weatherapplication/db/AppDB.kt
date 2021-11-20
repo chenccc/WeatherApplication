@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.james.weatherapplication.data.model.CityWeather
 import com.james.weatherapplication.db.dao.CityWeatherDao
+import com.james.weatherapplication.utils.WeatherListConverter
 
 @Database(entities = [CityWeather::class], version = 1, exportSchema = false)
+@TypeConverters(WeatherListConverter::class)
 abstract class AppDB: RoomDatabase() {
     abstract fun cityWeatherDao(): CityWeatherDao
 

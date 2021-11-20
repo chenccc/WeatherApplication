@@ -1,9 +1,7 @@
 package com.james.weatherapplication.data.model
 
 import android.os.Parcelable
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -31,8 +29,7 @@ data class CityWeather(
     val timezone: Int,
     val visibility: Int,
 
-//    @Embedded(prefix = "weather")
-//    val weather: List<Weather>,
+    val weather: List<Weather>,
 
     @Embedded(prefix = "wind")
     val wind: Wind

@@ -7,31 +7,107 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="@dimen/big_icon_size"
+            android:layout_height="@dimen/big_icon_size"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:contentDescription="@string/search"
+            app:layout_constraintBottom_toBottomOf="@+id/cityEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cityEditText"
+            app:srcCompat="@drawable/search" />
+
+        <TextView
+            android:id="@+id/cityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:textColor="@color/black"
+            android:textSize="@dimen/large_text_size"
+            app:layout_constraintStart_toStartOf="@+id/cityEditText"
+            app:layout_constraintTop_toBottomOf="@+id/cityEditText" />
+
+        <TextView
+            android:id="@+id/tempText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:text="@string/temperature"
+            android:textSize="@dimen/city_text_size"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/cityName" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintGuide_percent="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/cityEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/city_text_size"
             android:layout_marginStart="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_normal"
             android:layout_marginEnd="@dimen/margin_normal"
             android:hint="@string/city_name"
             android:inputType="text"
             android:minHeight="@dimen/edit_text_min_height"
+            android:textSize="@dimen/city_text_size"
             app:layout_constraintEnd_toStartOf="@+id/search"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/search"
-            android:layout_width="@dimen/big_icon_size"
-            android:layout_height="@dimen/big_icon_size"
-            android:layout_marginEnd="@dimen/margin_normal"
-            app:layout_constraintBottom_toBottomOf="@+id/cityEditText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/cityEditText"
-            app:srcCompat="@drawable/search"
-            android:contentDescription="@string/search" />
+        <TextView
+            android:id="@+id/temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:textSize="@dimen/city_text_size"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/tempText" />
+
+        <TextView
+            android:id="@+id/humidityText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@string/humidity"
+            android:textSize="@dimen/city_text_size"
+            app:layout_constraintEnd_toEndOf="@+id/tempText"
+            app:layout_constraintTop_toBottomOf="@+id/tempText" />
+
+        <TextView
+            android:id="@+id/humidity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/city_text_size"
+            app:layout_constraintStart_toStartOf="@+id/temp"
+            app:layout_constraintTop_toTopOf="@+id/humidityText" />
+
+        <TextView
+            android:id="@+id/cloudText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:text="@string/weather"
+            android:textSize="@dimen/city_text_size"
+            app:layout_constraintEnd_toEndOf="@+id/humidityText"
+            app:layout_constraintTop_toBottomOf="@+id/humidityText" />
+
+        <TextView
+            android:id="@+id/currentWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/city_text_size"
+            app:layout_constraintStart_toStartOf="@+id/humidity"
+            app:layout_constraintTop_toTopOf="@+id/cloudText" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>

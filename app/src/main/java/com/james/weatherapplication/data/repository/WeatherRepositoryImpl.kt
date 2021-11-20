@@ -18,25 +18,21 @@ class WeatherRepositoryImpl @Inject constructor(
     @ApplicationContext private val appContext: Context
 ): WeatherRepository{
     override suspend fun getWeatherForCity(city: String): CityWeather {
-        with(Dispatchers.IO) {
-            // retrieve from db
-            db.cityWeatherDao().getWeatherForCity(city)?.let {
-                if (!NetworkUtils.isNetworkConnected(appContext)) {
-                    return it
-                }
+        // retrieve from db
+        db.cityWeatherDao().getWeatherForCity(city)?.let {
+            if (!NetworkUtils.isNetworkConnected(appContext)) {
+                return it
             }
+        }
 
-            // retrieve from api
-            val weatherFromAPI = service.getWeatherForCity(
-                city = city,
-                appID = appContext.resources.getString(R.string.api_key)
-            )
-
-            if (weatherFromAPI.cod == Constants.GOOD_RESPONSE) {
-                insertWeatherToDB(weatherFromAPI)
+        // retrieve from api
+        return service.getWeatherForCity(
+            city = city,
+            appID = appContext.resources.getString(R.string.api_key)
+        ).apply {
+            if (cod == Constants.GOOD_RESPONSE) {
+                insertWeatherToDB(this)
             }
-
-            return weatherFromAPI
         }
     }
 

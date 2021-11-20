@@ -4,4 +4,7 @@
     <string name="close">close</string>
     <string name="city_name">city name</string>
     <string name="search">Search weather for city</string>
+    <string name="temperature">Temperature(°C):</string>
+    <string name="humidity">Humidity:</string>
+    <string name="weather">Weather:</string>
 </resources>
