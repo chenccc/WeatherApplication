@@ -5,4 +5,6 @@ import com.james.weatherapplication.utils.SingleLiveEvent
 
 class MainViewModel: BaseViewModel() {
     val drawerOpenEvent = SingleLiveEvent<Unit>()
+    val changeCityEvent = SingleLiveEvent<String>()
+    val closeDrawerEvent = SingleLiveEvent<Unit>()
 }

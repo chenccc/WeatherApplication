@@ -49,6 +49,13 @@ class DrawerFragment: BaseFragment<FragmentDrawerBinding, DrawerViewModel>() {
             observe(cityWeatherList) {
                 adapter.submitList(it)
             }
+
+            observe(selectWeather) {
+                mainViewModel.apply {
+                    changeCityEvent.postValue(it)
+                    closeDrawerEvent.postValue(Unit)
+                }
+            }
         }
     }
 }

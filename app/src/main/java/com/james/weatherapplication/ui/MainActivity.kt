@@ -1,6 +1,7 @@
 package com.james.weatherapplication.ui
 
 import android.util.Log
+import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
@@ -14,6 +15,7 @@ import com.james.weatherapplication.ext.addFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
+import com.james.weatherapplication.ext.observe
 
 
 @AndroidEntryPoint
@@ -39,7 +41,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun bindVM(binding: ActivityMainBinding, vm: MainViewModel) = Unit
+    override fun bindVM(binding: ActivityMainBinding, vm: MainViewModel) {
+        with(vm) {
+            observe(closeDrawerEvent) {
+                drawerLayout?.closeDrawer(Gravity.LEFT)
+            }
+        }
+    }
 
     override fun setupView() {
         toggle = ActionBarDrawerToggle(
