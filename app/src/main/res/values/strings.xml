@@ -9,4 +9,6 @@
     <string name="weather">Weather:</string>
     <string name="pressure">Pressure:</string>
     <string name="country">Country:</string>
+    <string name="delete">delete</string>
+    <string name="history">History</string>
 </resources>

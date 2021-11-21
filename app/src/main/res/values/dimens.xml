@@ -8,4 +8,6 @@
     <dimen name="big_icon_size">48dp</dimen>
     <dimen name="city_text_size">20sp</dimen>
     <dimen name="large_text_size">30sp</dimen>
+    <dimen name="recycler_item_textview_size">200dp</dimen>
+    <dimen name="delete_button_size">60dp</dimen>
 </resources>

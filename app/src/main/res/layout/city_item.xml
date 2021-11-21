@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="item"
+            type="com.james.weatherapplication.data.model.CityWeather" />
+
+        <variable
+            name="viewModel"
+            type="com.james.weatherapplication.ui.drawer.DrawerViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="@{() -> viewModel.selectCity(item)}">
+
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="@dimen/recycler_item_textview_size"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_normal"
+            android:text="@{item.name}"
+            android:textSize="@dimen/city_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_width="@dimen/delete_button_size"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/city"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/city"
+            app:srcCompat="@drawable/delete"
+            android:contentDescription="@string/delete"
+            android:onClick="@{() -> viewModel.deleteCity(item.name)}"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

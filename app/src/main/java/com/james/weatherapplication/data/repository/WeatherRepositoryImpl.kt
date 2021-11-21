@@ -45,7 +45,7 @@ class WeatherRepositoryImpl @Inject constructor(
         db.cityWeatherDao().clearCity(city)
     }
 
-    override suspend fun getAllCities(): List<String> =
+    override suspend fun getAllCities(): List<CityWeather> =
         db.cityWeatherDao().getAllRequestCities()
 
 }
