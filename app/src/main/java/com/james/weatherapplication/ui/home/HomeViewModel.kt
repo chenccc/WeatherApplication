@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.james.weatherapplication.base.BaseViewModel
 import com.james.weatherapplication.data.model.CityWeather
 import com.james.weatherapplication.data.repository.WeatherRepository
+import com.james.weatherapplication.utils.CityWeatherHelper
 import com.james.weatherapplication.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -20,7 +21,7 @@ class HomeViewModel @Inject constructor(
         private const val TAG = "HomeViewModel"
     }
 
-    val weatherEvent = SingleLiveEvent<CityWeather>()
+    val weatherField = ObservableField(CityWeatherHelper.createEmptyCityWeather())
 
     fun clickSearch(cityName: String) {
         if (cityName.isNotEmpty()) {
@@ -29,7 +30,7 @@ class HomeViewModel @Inject constructor(
                 try {
                     val result = weatherRepository.getWeatherForCity(cityName)
                     Log.d(TAG, "result is $result")
-                    weatherEvent.postValue(result)
+                    weatherField.set(result)
                 } catch (ex: Exception) {
                     errorMessage.postValue(ex.toString())
                 }

@@ -3,148 +3,158 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/search"
-            android:layout_width="@dimen/big_icon_size"
-            android:layout_height="@dimen/big_icon_size"
-            android:layout_marginEnd="@dimen/margin_normal"
-            android:contentDescription="@string/search"
-            app:layout_constraintBottom_toBottomOf="@+id/cityEditText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/cityEditText"
-            app:srcCompat="@drawable/search" />
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="@dimen/big_icon_size"
+                android:layout_height="@dimen/big_icon_size"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:contentDescription="@string/search"
+                app:layout_constraintBottom_toBottomOf="@+id/cityEditText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cityEditText"
+                app:srcCompat="@drawable/search" />
 
-        <TextView
-            android:id="@+id/cityName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_large"
-            android:textColor="@color/black"
-            android:textSize="@dimen/large_text_size"
-            app:layout_constraintStart_toStartOf="@+id/cityEditText"
-            app:layout_constraintTop_toBottomOf="@+id/cityEditText" />
+            <TextView
+                android:id="@+id/cityName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:textColor="@color/black"
+                android:textSize="@dimen/large_text_size"
+                android:text="@{viewModel.weatherField.name}"
+                app:layout_constraintStart_toStartOf="@+id/cityEditText"
+                app:layout_constraintTop_toBottomOf="@+id/cityEditText" />
 
-        <TextView
-            android:id="@+id/tempText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:layout_marginEnd="@dimen/margin_normal"
-            android:text="@string/temperature"
-            android:textSize="@dimen/city_text_size"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/cityName" />
+            <TextView
+                android:id="@+id/tempText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:text="@string/temperature"
+                android:textSize="@dimen/city_text_size"
+                app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/cityName" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintGuide_percent="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintGuide_percent="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/cityEditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_normal"
-            android:layout_marginTop="@dimen/margin_normal"
-            android:layout_marginEnd="@dimen/margin_normal"
-            android:hint="@string/city_name"
-            android:inputType="text"
-            android:minHeight="@dimen/edit_text_min_height"
-            android:textSize="@dimen/city_text_size"
-            app:layout_constraintEnd_toStartOf="@+id/search"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cityEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:hint="@string/city_name"
+                android:inputType="text"
+                android:minHeight="@dimen/edit_text_min_height"
+                android:textSize="@dimen/city_text_size"
+                app:layout_constraintEnd_toStartOf="@+id/search"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_normal"
-            android:textSize="@dimen/city_text_size"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toTopOf="@+id/tempText" />
+            <TextView
+                android:id="@+id/temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_normal"
+                android:textSize="@dimen/city_text_size"
+                android:text='@{String.format("%.2f", viewModel.weatherField.main.temp)}'
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/tempText" />
 
-        <TextView
-            android:id="@+id/humidityText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:text="@string/humidity"
-            android:textSize="@dimen/city_text_size"
-            app:layout_constraintEnd_toEndOf="@+id/tempText"
-            app:layout_constraintTop_toBottomOf="@+id/tempText" />
+            <TextView
+                android:id="@+id/humidityText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="@string/humidity"
+                android:textSize="@dimen/city_text_size"
+                app:layout_constraintEnd_toEndOf="@+id/tempText"
+                app:layout_constraintTop_toBottomOf="@+id/tempText" />
 
-        <TextView
-            android:id="@+id/humidity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/city_text_size"
-            app:layout_constraintStart_toStartOf="@+id/temp"
-            app:layout_constraintTop_toTopOf="@+id/humidityText" />
+            <TextView
+                android:id="@+id/humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/city_text_size"
+                android:text='@{String.format("%d", viewModel.weatherField.main.humidity)}'
+                app:layout_constraintStart_toStartOf="@+id/temp"
+                app:layout_constraintTop_toTopOf="@+id/humidityText" />
 
-        <TextView
-            android:id="@+id/cloudText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:text="@string/weather"
-            android:textSize="@dimen/city_text_size"
-            app:layout_constraintEnd_toEndOf="@+id/humidityText"
-            app:layout_constraintTop_toBottomOf="@+id/humidityText" />
+            <TextView
+                android:id="@+id/cloudText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="@string/weather"
+                android:textSize="@dimen/city_text_size"
+                app:layout_constraintEnd_toEndOf="@+id/humidityText"
+                app:layout_constraintTop_toBottomOf="@+id/humidityText" />
 
-        <TextView
-            android:id="@+id/currentWeather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/city_text_size"
-            app:layout_constraintStart_toStartOf="@+id/humidity"
-            app:layout_constraintTop_toTopOf="@+id/cloudText" />
+            <TextView
+                android:id="@+id/currentWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/city_text_size"
+                android:text="@{viewModel.weatherField.weather.get(0).main}"
+                app:layout_constraintStart_toStartOf="@+id/humidity"
+                app:layout_constraintTop_toTopOf="@+id/cloudText" />
 
-        <TextView
-            android:id="@+id/pressureText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:textSize="@dimen/city_text_size"
-            android:text="@string/pressure"
-            app:layout_constraintEnd_toEndOf="@+id/cloudText"
-            app:layout_constraintTop_toBottomOf="@+id/cloudText" />
+            <TextView
+                android:id="@+id/pressureText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:textSize="@dimen/city_text_size"
+                android:text="@string/pressure"
+                app:layout_constraintEnd_toEndOf="@+id/cloudText"
+                app:layout_constraintTop_toBottomOf="@+id/cloudText" />
 
-        <TextView
-            android:id="@+id/pressure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/city_text_size"
-            app:layout_constraintStart_toStartOf="@+id/currentWeather"
-            app:layout_constraintTop_toTopOf="@+id/pressureText" />
+            <TextView
+                android:id="@+id/pressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/city_text_size"
+                android:text='@{String.format("%d", viewModel.weatherField.main.pressure)}'
+                app:layout_constraintStart_toStartOf="@+id/currentWeather"
+                app:layout_constraintTop_toTopOf="@+id/pressureText" />
 
-        <TextView
-            android:id="@+id/countryText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium"
-            android:textSize="@dimen/city_text_size"
-            android:text="@string/country"
-            app:layout_constraintEnd_toEndOf="@+id/pressureText"
-            app:layout_constraintTop_toBottomOf="@+id/pressureText" />
+            <TextView
+                android:id="@+id/countryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:textSize="@dimen/city_text_size"
+                android:text="@string/country"
+                app:layout_constraintEnd_toEndOf="@+id/pressureText"
+                app:layout_constraintTop_toBottomOf="@+id/pressureText" />
 
-        <TextView
-            android:id="@+id/country"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/city_text_size"
-            app:layout_constraintStart_toStartOf="@+id/pressure"
-            app:layout_constraintTop_toTopOf="@+id/countryText" />
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/city_text_size"
+                android:text="@{viewModel.weatherField.sys.country}"
+                app:layout_constraintStart_toStartOf="@+id/pressure"
+                app:layout_constraintTop_toTopOf="@+id/countryText" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <data>
         <variable

@@ -46,6 +46,7 @@ class DrawerFragment: BaseFragment<FragmentDrawerBinding, DrawerViewModel>() {
         }
 
         with(drawerViewModel) {
+            getCities()
             observe(cityWeatherList) {
                 adapter.submitList(it)
             }

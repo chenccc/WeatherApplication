@@ -29,30 +29,9 @@ class HomeFragment: BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     override fun bindVM(binding: FragmentHomeBinding, viewModel: HomeViewModel) {
         binding.viewModel = viewModel
 
-        with(viewModel) {
-            observe(weatherEvent) {
-                fillHomePage(it)
-            }
-        }
-
         with(mainViewModel) {
             observe(changeCityEvent) {
                 viewModel.clickSearch(it)
-            }
-        }
-    }
-
-    private fun fillHomePage(cityWeather: CityWeather) {
-        cityWeather.apply {
-            cityName.text = name
-            humidity.text = main.humidity.toString()
-            country.text = sys.country
-            temp.text = main.temp.toString()
-            pressure.text = main.pressure.toString()
-            currentWeather.text = if (weather.isNotEmpty()) {
-                weather[0].main
-            } else {
-                ""
             }
         }
     }
