@@ -34,15 +34,12 @@ class NetworkModule {
     fun provideOkHttpClient(
         @ApplicationContext context: Context,
         httpLoggingInterceptor: HttpLoggingInterceptor,
-        @Named(Constants.STUB_INTERCEPTOR_KEY)
-        stubInterceptor: Interceptor
     ): OkHttpClient =
         OkHttpClient.Builder().apply {
             if (BuildConfig.DEBUG) {
                 addInterceptor(httpLoggingInterceptor)
             }
             addInterceptor(NetworkConnectionInterceptor(context))
-            addInterceptor(stubInterceptor)
         }.build()
 
     @Provides

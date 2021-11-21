@@ -7,7 +7,7 @@ import com.james.weatherapplication.R
 import com.james.weatherapplication.base.BaseFragment
 import com.james.weatherapplication.databinding.FragmentDrawerBinding
 import com.james.weatherapplication.ext.observe
-import com.james.weatherapplication.ui.MainViewModel
+import com.james.weatherapplication.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_drawer.*
 

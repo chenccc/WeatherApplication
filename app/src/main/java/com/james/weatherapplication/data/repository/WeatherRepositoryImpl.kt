@@ -9,7 +9,6 @@ import com.james.weatherapplication.db.AppDB
 import com.james.weatherapplication.utils.Constants
 import com.james.weatherapplication.utils.NetworkUtils
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 
 class WeatherRepositoryImpl @Inject constructor(
@@ -18,7 +17,7 @@ class WeatherRepositoryImpl @Inject constructor(
     @ApplicationContext private val appContext: Context
 ): WeatherRepository{
     override suspend fun getWeatherForCity(city: String): CityWeather {
-        // retrieve from db
+        // retrieve weather of city from db
         db.cityWeatherDao().getWeatherForCity(city.uppercase())?.let {
             if (!NetworkUtils.isNetworkConnected(appContext)) {
                 insertWeatherToDB(it.copy(lastAccessTime = System.currentTimeMillis()))
@@ -26,7 +25,7 @@ class WeatherRepositoryImpl @Inject constructor(
             }
         }
 
-        // retrieve from api
+        // retrieve weather of city from api
         return service.getWeatherForCity(
             city = city,
             appID = appContext.resources.getString(R.string.api_key)

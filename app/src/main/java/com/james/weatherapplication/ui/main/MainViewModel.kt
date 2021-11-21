@@ -1,4 +1,4 @@
-package com.james.weatherapplication.ui
+package com.james.weatherapplication.ui.main
 
 import com.james.weatherapplication.base.BaseViewModel
 import com.james.weatherapplication.utils.SingleLiveEvent

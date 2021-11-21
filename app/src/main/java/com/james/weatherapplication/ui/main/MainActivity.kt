@@ -1,4 +1,4 @@
-package com.james.weatherapplication.ui
+package com.james.weatherapplication.ui.main
 
 import android.util.Log
 import android.view.Gravity
@@ -43,6 +43,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun bindVM(binding: ActivityMainBinding, vm: MainViewModel) {
         with(vm) {
+            binding.viewModel = this
             observe(closeDrawerEvent) {
                 drawerLayout?.closeDrawer(Gravity.LEFT)
             }
@@ -65,6 +66,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
 
             override fun onDrawerOpened(drawerView: View) {
+                // notify DrawerFragment to update the history when drawer opens
                 Log.d(TAG, "drawer open")
                 mainViewModel.drawerOpenEvent.postValue(Unit)
             }
@@ -83,6 +85,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     private fun setupFragments() {
+        // add home fragment and drawer fragment
         supportFragmentManager.apply {
             val homeFragment = findFragmentById(R.id.fragment_container)
                 as? HomeFragment

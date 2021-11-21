@@ -41,17 +41,6 @@ android {
     buildFeatures {
         dataBinding true
     }
-
-    flavorDimensions "stub"
-
-    productFlavors {
-        stub {
-            dimension "stub"
-        }
-        nonstub {
-            dimension "stub"
-        }
-    }
 }
 
 dependencies {

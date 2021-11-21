@@ -30,9 +30,13 @@ class HomeViewModel @Inject constructor(
     private fun getLastAccessCity() {
         viewModelScope.launch {
             try {
-                val result = weatherRepository.getAllCities()
-                if (result.isNotEmpty()) {
-                    weatherField.set(result[0])
+                /**
+                 * cityWeatherList is sorted by lastAccessTime desc,
+                 * Therefore, the first element of cityWeatherList is the last access one
+                 */
+                val cityWeatherList = weatherRepository.getAllCities()
+                if (cityWeatherList.isNotEmpty()) {
+                    weatherField.set(cityWeatherList[0])
                 }
             } catch (ex: Exception) {
                 errorMessage.postValue(ex.toString())
@@ -45,9 +49,9 @@ class HomeViewModel @Inject constructor(
             Log.d(TAG, "Search weather for $cityName")
             viewModelScope.launch {
                 try {
-                    val result = weatherRepository.getWeatherForCity(cityName)
-                    Log.d(TAG, "result is $result")
-                    weatherField.set(result)
+                    val weather = weatherRepository.getWeatherForCity(cityName)
+                    Log.d(TAG, "weather is $weather")
+                    weatherField.set(weather)
                 } catch (ex: Exception) {
                     errorMessage.postValue(ex.toString())
                 }
