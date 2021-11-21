@@ -19,7 +19,7 @@ class WeatherRepositoryImpl @Inject constructor(
 ): WeatherRepository{
     override suspend fun getWeatherForCity(city: String): CityWeather {
         // retrieve from db
-        db.cityWeatherDao().getWeatherForCity(city)?.let {
+        db.cityWeatherDao().getWeatherForCity(city.uppercase())?.let {
             if (!NetworkUtils.isNetworkConnected(appContext)) {
                 return it
             }

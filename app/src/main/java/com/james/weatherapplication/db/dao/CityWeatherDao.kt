@@ -8,7 +8,7 @@ import com.james.weatherapplication.data.model.CityWeather
 
 @Dao
 interface CityWeatherDao {
-    @Query("SELECT * FROM CityWeather WHERE name = :city")
+    @Query("SELECT * FROM CityWeather WHERE upper(name) = :city")
     suspend fun getWeatherForCity(city: String): CityWeather?
 
     @Query("DELETE FROM CityWeather WHERE name = :city")

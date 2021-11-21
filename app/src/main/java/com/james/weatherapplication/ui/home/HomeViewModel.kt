@@ -25,15 +25,14 @@ class HomeViewModel @Inject constructor(
     fun clickSearch(cityName: String) {
         if (cityName.isNotEmpty()) {
             Log.d(TAG, "Search weather for $cityName")
-        }
-
-        viewModelScope.launch {
-            try {
-                val result = weatherRepository.getWeatherForCity(cityName)
-                Log.d(TAG, "result is $result")
-                weatherEvent.postValue(result)
-            } catch (ex: Exception) {
-                errorMessage.postValue(ex.toString())
+            viewModelScope.launch {
+                try {
+                    val result = weatherRepository.getWeatherForCity(cityName)
+                    Log.d(TAG, "result is $result")
+                    weatherEvent.postValue(result)
+                } catch (ex: Exception) {
+                    errorMessage.postValue(ex.toString())
+                }
             }
         }
     }
