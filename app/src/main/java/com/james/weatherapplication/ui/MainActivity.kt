@@ -1,6 +1,8 @@
 package com.james.weatherapplication.ui
 
+import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import com.james.weatherapplication.R
@@ -11,10 +13,16 @@ import com.james.weatherapplication.ui.home.HomeFragment
 import com.james.weatherapplication.ext.addFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
+
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private lateinit var toggle: ActionBarDrawerToggle
+
+    companion object {
+        private const val TAG = "MainActivity"
+    }
 
     private val mainViewModel: MainViewModel by viewModels()
 
@@ -43,6 +51,24 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             drawerLayout.addDrawerListener(this)
             syncState()
         }
+
+        drawerLayout.addDrawerListener(object : DrawerListener {
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+            }
+
+            override fun onDrawerOpened(drawerView: View) {
+                Log.d(TAG, "drawer open")
+                mainViewModel.drawerOpenEvent.postValue(Unit)
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                Log.d(TAG, "drawer close")
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {
+            }
+
+        })
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setupFragments()
