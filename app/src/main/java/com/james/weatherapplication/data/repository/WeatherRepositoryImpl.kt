@@ -21,6 +21,7 @@ class WeatherRepositoryImpl @Inject constructor(
         // retrieve from db
         db.cityWeatherDao().getWeatherForCity(city.uppercase())?.let {
             if (!NetworkUtils.isNetworkConnected(appContext)) {
+                insertWeatherToDB(it.copy(lastAccessTime = System.currentTimeMillis()))
                 return it
             }
         }
@@ -31,7 +32,7 @@ class WeatherRepositoryImpl @Inject constructor(
             appID = appContext.resources.getString(R.string.api_key)
         ).apply {
             if (cod == Constants.GOOD_RESPONSE) {
-                insertWeatherToDB(this)
+                insertWeatherToDB(this.copy(lastAccessTime = System.currentTimeMillis()))
             }
         }
     }
@@ -47,5 +48,4 @@ class WeatherRepositoryImpl @Inject constructor(
 
     override suspend fun getAllCities(): List<CityWeather> =
         db.cityWeatherDao().getAllRequestCities()
-
 }

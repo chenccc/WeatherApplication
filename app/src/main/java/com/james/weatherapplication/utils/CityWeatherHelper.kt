@@ -47,6 +47,7 @@ object CityWeatherHelper {
         timezone = 0,
         id = 0,
         name = "",
-        cod = 0
+        cod = 0,
+        lastAccessTime = 0
     )
 }

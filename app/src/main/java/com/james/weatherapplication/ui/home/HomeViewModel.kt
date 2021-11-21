@@ -21,7 +21,24 @@ class HomeViewModel @Inject constructor(
         private const val TAG = "HomeViewModel"
     }
 
+    init {
+        getLastAccessCity()
+    }
+
     val weatherField = ObservableField(CityWeatherHelper.createEmptyCityWeather())
+
+    private fun getLastAccessCity() {
+        viewModelScope.launch {
+            try {
+                val result = weatherRepository.getAllCities()
+                if (result.isNotEmpty()) {
+                    weatherField.set(result[0])
+                }
+            } catch (ex: Exception) {
+                errorMessage.postValue(ex.toString())
+            }
+        }
+    }
 
     fun clickSearch(cityName: String) {
         if (cityName.isNotEmpty()) {

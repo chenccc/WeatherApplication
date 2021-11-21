@@ -14,7 +14,7 @@ interface CityWeatherDao {
     @Query("DELETE FROM CityWeather WHERE name = :city")
     suspend fun clearCity(city: String)
 
-    @Query("SELECT * FROM CityWeather")
+    @Query("SELECT * FROM CityWeather ORDER BY lastAccessTime DESC")
     suspend fun getAllRequestCities(): List<CityWeather>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -32,5 +32,7 @@ data class CityWeather(
     val weather: List<Weather>,
 
     @Embedded(prefix = "wind")
-    val wind: Wind
+    val wind: Wind,
+
+    val lastAccessTime: Long
 ): Parcelable
