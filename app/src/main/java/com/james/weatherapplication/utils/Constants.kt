@@ -5,4 +5,5 @@ object Constants {
     const val STUB_INTERCEPTOR_KEY = "stub_interceptor"
     const val WEATHER = "weather"
     const val GOOD_RESPONSE = 200
+    const val TEST_DB = "test_db"
 }
