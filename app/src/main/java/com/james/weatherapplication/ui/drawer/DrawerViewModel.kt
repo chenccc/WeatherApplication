@@ -33,30 +33,24 @@ class DrawerViewModel @Inject constructor(
                 val result = weatherRepository.getAllCities()
                 _cityWeatherList.postValue(result)
             } catch (ex: Exception) {
-                errorMessage.postValue(ex.toString())
+                errorMessage.postValue(ex.message.toString())
             }
         }
     }
 
     // select a city from history
     fun selectCity(cityWeather: CityWeather) {
-        Log.d(TAG, "Select $cityWeather")
         _selectWeather.postValue(cityWeather.name)
     }
 
     // delete a city from history
     fun deleteCity(city: String) {
-        removeCityFromDB(city)
-        getCities()
-    }
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun removeCityFromDB(city: String) {
         viewModelScope.launch {
             try {
                 weatherRepository.deleteCity(city)
+                getCities()
             } catch (ex: Exception) {
-                errorMessage.postValue(ex.toString())
+                errorMessage.postValue(ex.message.toString())
             }
         }
     }
